@@ -1,13 +1,16 @@
-feature 'user signs up' do
+require 'web_helper'
 
-  scenario 'displays welcome message after user signs up' do
-    visit ('/')
-      fill_in('name', with: 'MakersLady')
-      fill_in('username', with: 'MissWonderful')
-      fill_in('email', with: 'MakersLady@paradise.com')
-      fill_in('password', with: 'M3dali0n5')
+feature 'User sign up' do
 
-      click_on('Sign Up')
-      expect(page).to have_content('Welcome MissWonderful')
+  scenario 'I can sign up as a new user' do
+    expect {sign_up}.to change(User, :count).by(1)
+    expect(page).to have_content('Welcome MissWonderful')
+    expect(User.first.email).to eq('MakersLady@paradise.com')
+
   end
+
+  scenario 'requires a matching password to verify account' do
+    expect {sign_up(password_confirmation: 'wrong')}.not_to change(User, :count)
+  end
+
 end
