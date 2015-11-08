@@ -1,11 +1,11 @@
-# require 'bcrypt'
+require 'bcrypt'
 
 class User
   include DataMapper::Resource
-  # include BCrypt
+  include BCrypt
 
   attr_reader :password
-  attr_accessor :password_verify
+  attr_accessor :password_confirmation
 
   validates_confirmation_of :password
 

@@ -1,14 +1,21 @@
-ENV["RACK_ENV"] = "test"
-
 require 'coveralls'
 require 'simplecov'
+
+SimpleCov.formatters = [
+  SimpleCov::Formatter::HTMLFormatter,
+  Coveralls::SimpleCov::Formatter
+]
+Coveralls.wear!
+
+ENV["RACK_ENV"] = "test"
+
 require 'capybara/rspec'
 require './app/data_mapper_setup'
 require 'database_cleaner'
 
 require File.join(File.dirname(__FILE__), '../app', 'app.rb')
 
-Capybara.app = DataRecorder
+Capybara.app = ChitterMessenger
 
 RSpec.configure do |config|
 
@@ -25,9 +32,3 @@ RSpec.configure do |config|
     DatabaseCleaner.clean
   end
 end
-
-SimpleCov.formatters = [
-  SimpleCov::Formatter::HTMLFormatter,
-  Coveralls::SimpleCov::Formatter
-]
-Coveralls.wear!
