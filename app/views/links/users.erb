@@ -1,16 +1,14 @@
-<h1> Hello, chitter is happy to see you! </h1>
-
-<p> Please sign up </p>
+<p> Please sign up: </p>
 
 <form action="/users" method="post">
   <label for="firstname">
     Your Name: <input type="text" name="firstname">
   </label>
   <label for="username">
-    Username: <input type="text" name="username" >
+    Username: <input name='username' type='text' value='<%= @user.username %>' required>
   </label>
   <label for="email">
-    Email: <input type="text" name="email">
+    Email: <input name='email' type='text' value='<%= @user.email %>' required>
   </label>
   <label for="password">
     Password: <input type="text" name="password">

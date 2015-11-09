@@ -21,7 +21,7 @@ class ChitterMessenger < Sinatra::Base
     erb :'links/index'
   end
 
-  get '/users/new' do
+  get '/users' do
     erb :'links/users'
   end
 
@@ -34,14 +34,14 @@ class ChitterMessenger < Sinatra::Base
       session[:user_id] = @user.id
       redirect to('/')
     else
-      flash.now[:notice] = "Password and confirmation password do not match"
-      erb :'links/users/new'
+      flash.now[:errors] = @user.errors.full_messages
+      erb :'links/users'
     end
   end
 
   get '/confirm' do
     @username = params[:username]
-    erb :'links/index'
+    erb :'links/users'
   end
 
   run! if app_file == $0
