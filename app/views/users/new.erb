@@ -5,10 +5,10 @@
     Your Name: <input type="text" name="firstname">
   </label>
   <label for="username">
-    Username: <input name='username' type='text' value='<%= @user.username %>' required>
+    Username: <input name='username' type='text' value='<%= @user.username unless @user == nil %>' required>
   </label>
   <label for="email">
-    Email: <input name='email' type='text' value='<%= @user.email %>' required>
+    Email: <input name='email' type='text' value='<%= @user.email unless @user == nil %>' required>
   </label>
   <label for="password">
     Password: <input type="text" name="password">

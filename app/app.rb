@@ -18,11 +18,11 @@ class ChitterMessenger < Sinatra::Base
  end
 
   get '/' do
-    erb :'links/index'
+    erb :'users/index'
   end
 
   get '/users' do
-    erb :'links/users'
+    erb :'users/new'
   end
 
   post '/users' do
@@ -35,13 +35,31 @@ class ChitterMessenger < Sinatra::Base
       redirect to('/')
     else
       flash.now[:errors] = @user.errors.full_messages
-      erb :'links/users'
+      erb :'users/new'
     end
   end
 
+  get '/new' do
+    erb :'users/new'
+  end
   get '/confirm' do
     @username = params[:username]
-    erb :'links/users'
+    erb :'users/new'
+  end
+
+  get '/new_session' do
+    erb :'sessions/new_session'
+  end
+
+  post '/sessions' do
+    user = User.authenticate(params[:email], params[:password])
+    if user
+      session[:user_id] = user.id
+      redirect to('/')
+    else
+      flash.now[:errors] = ['The email or password is incorrect']
+      erb :'sessions/new_session'
+    end
   end
 
   run! if app_file == $0

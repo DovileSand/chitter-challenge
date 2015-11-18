@@ -6,9 +6,7 @@
 
   <body>
     <% if current_user %>
-    <h1> Hello <%= current_user.username %>, chitter is happy to see you!</h1>
-    <% else %>
-    <h2> Hello! chitter is happy to see you!</h2>
+    <h1> Hello <%= @current_user.email %>, chitter is happy to see you!</h1>
     <% end %>
 
   <% if flash[:errors] && !flash[:errors].empty? %>
